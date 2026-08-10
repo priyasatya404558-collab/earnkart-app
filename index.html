@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EarnKart</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+    body { background-color: #e0f7fa; padding-bottom: 70px; }
+    
+    /* Header Banner */
+    .header { background: #00bcd4; color: white; padding: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; }
+    .balance-card { background: white; color: #333; padding: 15px; border-radius: 12px; margin-top: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    .balance-amount { font-size: 24px; font-weight: bold; color: #00bcd4; }
+    
+    .btn-container { display: flex; gap: 10px; margin-top: 10px; }
+    .btn { flex: 1; padding: 10px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+    .btn-deposit { background: #00bcd4; color: white; }
+    .btn-withdraw { background: #e0f7fa; color: #00bcd4; }
+
+    /* Task List */
+    .section-title { margin: 15px; font-size: 18px; color: #333; }
+    .task-card { background: white; margin: 15px; padding: 15px; border-radius: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .task-title { font-weight: bold; color: #00bcd4; font-size: 16px; }
+    .task-details { display: flex; justify-content: space-between; margin: 15px 0; text-align: center; }
+    .detail-box label { font-size: 12px; color: #777; display: block; }
+    .detail-box span { font-weight: bold; color: #333; }
+    .btn-action { width: 100%; background: #00bcd4; color: white; padding: 12px; border: none; border-radius: 25px; font-size: 16px; font-weight: bold; }
+
+    /* Bottom Navigation Bar */
+    .navbar { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #ccc; }
+    .nav-item { text-align: center; color: #777; text-decoration: none; font-size: 12px; }
+    .nav-item.active { color: #00bcd4; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header -->
+  <div class="header">
+    <h3>EarnKart</h3>
+    <div class="balance-card">
+      <small>NET BALANCE</small>
+      <div class="balance-amount">₹<span id="balance">0.00</span></div>
+      <div class="btn-container">
+        <button class="btn btn-deposit">Earn Points</button>
+        <button class="btn btn-withdraw" onclick="withdraw()">Withdraw</button>
+      </div>
+    </div>
+  </div>
+
+  <h4 class="section-title">Daily Available Tasks</h4>
+
+  <!-- Task Card 1 -->
+  <div class="task-card">
+    <div class="task-title">Task A - App Install</div>
+    <div class="task-details">
+      <div class="detail-box"><label>REWARD</label><span>₹50</span></div>
+      <div class="detail-box"><label>TIME</label><span>2 Mins</span></div>
+      <div class="detail-box"><label>TYPE</label><span>Free</span></div>
+    </div>
+    <button class="btn-action" onclick="completeTask(50)">Complete Task</button>
+  </div>
+
+  <!-- Task Card 2 -->
+  <div class="task-card">
+    <div class="task-title">Task B - Complete Survey</div>
+    <div class="task-details">
+      <div class="detail-box"><label>REWARD</label><span>₹30</span></div>
+      <div class="detail-box"><label>TIME</label><span>5 Mins</span></div>
+      <div class="detail-box"><label>TYPE</label><span>Free</span></div>
+    </div>
+    <button class="btn-action" onclick="completeTask(30)">Complete Task</button>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <div class="navbar">
+    <a href="#" class="nav-item active">Home</a>
+    <a href="#" class="nav-item">Offers</a>
+    <a href="#" class="nav-item">Team</a>
+    <a href="#" class="nav-item">Profile</a>
+  </div>
+
+  <script>
+    let currentBalance = 0;
+
+    function completeTask(reward) {
+      currentBalance += reward;
+      document.getElementById('balance').innerText = currentBalance.toFixed(2);
+      alert('Task completed! ₹' + reward + ' added to your balance.');
+    }
+
+    function withdraw() {
+      if(currentBalance < 50) {
+        alert('Minimum withdrawal threshold is ₹50');
+      } else {
+        alert('Withdrawal request submitted for ₹' + currentBalance);
+        currentBalance = 0;
+        document.getElementById('balance').innerText = "0.00";
+      }
+    }
+  </script>
+</body>
+</html>
